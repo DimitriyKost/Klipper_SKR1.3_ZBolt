@@ -1,29 +1,27 @@
-This document is a reference for options available in the Klipper
-config file.
+Этот документ является справочником по параметрам, доступным в файле конфигурации Klipper.
 
-The descriptions in this document are formatted so that it is possible
-to cut-and-paste them into a printer config file. See the
-[installation document](Installation.md) for information on setting up
-Klipper and choosing an initial config file.
+Описания в этом документе отформатированы таким образом, чтобы можно было
+вырезать и вставить их в файл конфигурации принтера. Смотрите
+[installation document](Installation.md)для получения информации о настройке
+Клиппер и выбор начального конфигурационного файла.
 
-# Micro-controller configuration
+# Конфигурация микроконтроллера
 
-## Format of micro-controller pin names
+## Формат пин-кодов микроконтроллеров
 
-Many config options require the name of a micro-controller pin.
-Klipper uses the hardware names for these pins - for example `PA4`.
+Для многих параметров конфигурации требуется имя pin-кода микроконтроллера.
+Клиппер использует названия оборудования для этих контактов - например, " PA4`.
 
-Pin names may be preceded by `!` to indicate that a reverse polarity
-should be used (eg, trigger on low instead of high).
+Имена контактов могут предшествовать !указанию на то, что должна использоваться 
+обратная полярность (например, триггер на низком уровне вместо высокого).
 
-Input pins may be preceded by `^` to indicate that a hardware pull-up
-resistor should be enabled for the pin. If the micro-controller
-supports pull-down resistors then an input pin may alternatively be
-preceded by `~`.
+Входным выводам может предшествовать ^ указание на то, что для этого вывода должен 
+быть включен аппаратный подтягивающий резистор. Если микроконтроллер поддерживает 
+понижающие резисторы, то входному контакту может альтернативно предшествовать ~.
 
-Note, some config sections may "create" additional pins. Where this
-occurs, the config section defining the pins must be listed in the
-config file before any sections using those pins.
+Обратите внимание, что некоторые разделы конфигурации могут "создавать" дополнительные 
+контакты. Если это происходит, раздел конфигурации, определяющий контакты, должен
+быть указан в файле конфигурации перед любыми разделами, использующими эти контакты.
 
 ## [mcu]
 
