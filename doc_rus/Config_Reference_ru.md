@@ -30,123 +30,125 @@ Configuration of the primary micro-controller.
 ```
 [mcu]
 serial:
-#   The serial port to connect to the MCU. If unsure (or if it
-#   changes) see the "Where's my serial port?" section of the FAQ.
-#   This parameter must be provided when using a serial port.
+#   Последовательный порт для подключения к MCU. Если вы не уверены (или если это изменится), 
+#   обратитесь к разделу "Где мой последовательный порт?" "Where's my serial port?" 
+#   в разделе часто задаваемых вопросов. Этот параметр должен быть указан при использовании последовательного порта.
 #baud: 250000
-#   The baud rate to use. The default is 250000.
+#   Скорость передачи данных в бодах. По умолчанию 250000.
 #canbus_uuid:
-#   If using a device connected to a CAN bus then this sets the unique
-#   chip identifier to connect to. This value must be provided when using
-#   CAN bus for communication.
+#   При использовании устройства, подключенного к шине CAN, устанавливается уникальный 
+#   идентификатор чипа для подключения. Это значение должно быть указано при 
+#   использовании шины CAN для связи.
 #canbus_interface:
-#   If using a device connected to a CAN bus then this sets the CAN
-#   network interface to use. The default is 'can0'.
+#   При использовании устройства, подключенного к CAN шине, настраивает сетевой 
+#   интерфейс CAN для использования. Значение по умолчанию - "can0".
 #restart_method:
-#   This controls the mechanism the host will use to reset the
-#   micro-controller. The choices are 'arduino', 'cheetah', 'rpi_usb',
-#   and 'command'. The 'arduino' method (toggle DTR) is common on
-#   Arduino boards and clones. The 'cheetah' method is a special
-#   method needed for some Fysetc Cheetah boards. The 'rpi_usb' method
-#   is useful on Raspberry Pi boards with micro-controllers powered
-#   over USB - it briefly disables power to all USB ports to
-#   accomplish a micro-controller reset. The 'command' method involves
-#   sending a Klipper command to the micro-controller so that it can
-#   reset itself. The default is 'arduino' if the micro-controller
-#   communicates over a serial port, 'command' otherwise.
+#   Механизм, который хост будет использовать для сброса микроконтроллера. 
+#   Варианты: 'arduino', 'cheetah', 'rpi_usb', и 'command'. 
+#   Метод "arduino" (переключение DTR) распространен на платах и клонах Arduino. 
+#   Метод 'cheetah' - это специальный метод, необходимый для некоторых 
+#   плат Fysetc Cheetah. Метод "rpi_usb" полезен на платах Raspberry Pi 
+#   с микроконтроллерами, работающими через USB - он ненадолго отключает 
+#   питание всех портов USB для выполнения сброса микроконтроллера. 
+#   Метод 'command' включает в себя отправку обрезанной команды на 
+#   микроконтроллер, чтобы он мог сбросить себя. По умолчанию используется
+#   'arduino', если микроконтроллер взаимодействует через последовательный порт, 
+#   в противном случае 'command'.
 ```
 
 ## [mcu my_extra_mcu]
 
-Additional micro-controllers (one may define any number of sections
-with an "mcu" prefix). Additional micro-controllers introduce
-additional pins that may be configured as heaters, steppers, fans,
-etc.. For example, if an "[mcu extra_mcu]" section is introduced, then
-pins such as "extra_mcu:ar9" may then be used elsewhere in the config
-(where "ar9" is a hardware pin name or alias name on the given mcu).
+Дополнительные микроконтроллеры (можно задать любое количество секций
+с префиксом "mcu"). Дополнительные микроконтроллеры вводят дополнительные
+контакты, которые могут быть сконфигурированы как нагреватели, шаговые
+двигатели, вентиляторы и т.д. Например, если введен раздел "[mcu extra_mcu]", 
+то контакты, такие как "extra_mcu:ar 9", могут затем использоваться 
+в других местах конфигурации ((где "ar 9" - это имя аппаратного pin-кода 
+или псевдоним на данном микроконтроллере).
 
 ```
 [mcu my_extra_mcu]
-# See the "mcu" section for configuration parameters.
+# Параметры конфигурации см. в разделе "mcu".
 ```
 
-# Common kinematic settings
+# Общие кинематические настройки
 
 ## [printer]
 
-The printer section controls high level printer settings.
+Раздел printer управляет настройками высокого уровня.
 
 ```
 [printer]
 kinematics:
-#   The type of printer in use. This option may be one of: cartesian,
-#   corexy, corexz, hybrid-corexy, hybrid-corexz, rotary_delta, delta,
-#   polar, winch, or none. This
-#   parameter must be specified.
+#   Тип используемого принтера. Этот параметр может быть одним 
+#   из следующих: cartesian, corexy, corexz, hybrid-corexy, hybrid-cortez, 
+#   rotary_delta, delta, polar, winch или нет. 
+#   Этот параметр необходимо указать.
 max_velocity:
-#   Maximum velocity (in mm/s) of the toolhead (relative to the
-#   print). This parameter must be specified.
+#   Максимальная скорость (в мм/с) инструментальной головки 
+#   (относительно отпечатка). Этот параметр должен быть указан.
 max_accel:
-#   Maximum acceleration (in mm/s^2) of the toolhead (relative to the
-#   print). This parameter must be specified.
+#   Максимальное ускорение (в мм/с^2) инструментальной головки 
+#   (относительно отпечатка). Этот параметр должен быть указан.
 #max_accel_to_decel:
-#   A pseudo acceleration (in mm/s^2) controlling how fast the
-#   toolhead may go from acceleration to deceleration. It is used to
-#   reduce the top speed of short zig-zag moves (and thus reduce
-#   printer vibration from these moves). The default is half of
-#   max_accel.
+#   Псевдоускорение (в мм/с^2), управляющее скоростью перехода головки 
+#   инструмента от ускорения к замедлению. Он используется для снижения 
+#   максимальной скорости коротких зигзагообразных перемещений (и, 
+#   таким образом, для уменьшения вибрации принтера от этих перемещений). 
+#   Значение по умолчанию равно половине значения max_accel.
 #square_corner_velocity: 5.0
-#   The maximum velocity (in mm/s) that the toolhead may travel a 90
-#   degree corner at. A non-zero value can reduce changes in extruder
-#   flow rates by enabling instantaneous velocity changes of the
-#   toolhead during cornering. This value configures the internal
-#   centripetal velocity cornering algorithm; corners with angles
-#   larger than 90 degrees will have a higher cornering velocity while
-#   corners with angles less than 90 degrees will have a lower
-#   cornering velocity. If this is set to zero then the toolhead will
-#   decelerate to zero at each corner. The default is 5mm/s.
+#   Максимальная скорость (в мм/с), с которой инструментальная головка 
+#   может перемещаться под углом 90 градусов. Ненулевое значение может
+#   уменьшить изменения расхода экструдера, позволяя мгновенно изменять 
+#   скорость инструментальной головки во время поворота. Это значение 
+#   настраивает алгоритм прохождения поворотов с внутренней центростремительной
+#   скоростью; углы больше 90 градусов будут иметь более высокую скорость
+#   прохождения поворотов, в то время как углы меньше 90 градусов будут
+#   иметь более низкую скорость прохождения поворотов. Если это значение
+#   равно нулю, то инструментальная головка будет замедляться до нуля в 
+#   каждом углу. Значение по умолчанию-5 мм/с.
 ```
 
 ## [stepper]
 
-Stepper motor definitions. Different printer types (as specified by
-the "kinematics" option in the [printer] config section) require
-different names for the stepper (eg, `stepper_x` vs `stepper_a`).
-Below are common stepper definitions.
+Определения шагового двигателя. Для разных типов принтеров (как указано 
+в опции "kinematics" в разделе конфигурации [printer]) требуются разные 
+имена для шагового устройства (например, " stepper_x` против `stepper_a`). 
+Ниже приведены общие определения шаговых устройств.
 
-See the [rotation distance document](Rotation_Distance.md) for
-information on calculating the `rotation_distance` parameter.
+См. [rotation distance document](Rotation_Distance.md) для
+получения дополнительной информации о вычислении параметра "rotation_distance".
 
 ```
 [stepper_x]
 step_pin:
-#   Step GPIO pin (triggered high). This parameter must be provided.
+#   Шаговый вывод GPIO (срабатывает при HIGH). Этот параметр должен быть указан.
 dir_pin:
-#   Direction GPIO pin (high indicates positive direction). This
-#   parameter must be provided.
+#	Штырь GPIO направления (высокий указывает на положительное направление). 
+#	Этот параметр должен быть указан.
 enable_pin:
-#   Enable pin (default is enable high; use ! to indicate enable
-#   low). If this parameter is not provided then the stepper motor
-#   driver must always be enabled.
+#   Включить pin (по умолчанию-включить высокий; используйте ! чтобы указать что 
+#  	нужно включить низкий уровень). Если этот параметр не указан, то драйвер 
+#	шагового двигателя всегда должен быть включен.
 rotation_distance:
-#   Distance (in mm) that the axis travels with one full rotation of
-#   the stepper motor (or final gear if gear_ratio is specified).
-#   This parameter must be provided.
+#   Расстояние (в мм), на которое проходит ось при одном полном вращении 
+#	шагового двигателя (или конечной передачи, если указано gear_ratio).
+#	Этот параметр должен быть указан.
 microsteps:
-#   The number of microsteps the stepper motor driver uses. This
-#   parameter must be provided.
+#   Количество микрошагов, используемых драйвером шагового двигателя. 
+#	Этот параметр должен быть указан.
 #full_steps_per_rotation: 200
-#   The number of full steps for one rotation of the stepper motor.
-#   Set this to 200 for a 1.8 degree stepper motor or set to 400 for a
-#   0.9 degree motor. The default is 200.
+#   Количество полных шагов для одного вращения шагового двигателя. 
+#	Установите значение 200 для шагового двигателя 1,8 градуса или 
+#	400 для двигателя 0,9 градуса. Значение по умолчанию равно 200.
 #gear_ratio:
-#   The gear ratio if the stepper motor is connected to the axis via a
-#   gearbox. For example, one may specify "5:1" if a 5 to 1 gearbox is
-#   in use. If the axis has multiple gearboxes one may specify a comma
-#   separated list of gear ratios (for example, "57:11, 2:1"). If a
-#   gear_ratio is specified then rotation_distance specifies the
-#   distance the axis travels for one full rotation of the final gear.
-#   The default is to not use a gear ratio.
+#   Передаточное число, если шаговый двигатель подключен к оси через коробку 
+#	передач. Например, можно указать "5:1", если используется коробка 
+#	передач 5 к 1. Если ось имеет несколько коробок передач, можно указать 
+#	список передаточных чисел, разделенных запятыми (например, "57:11, 2:1"). 
+#	Если указано значение gear_ratio, то rotation_distance определяет 
+#	расстояние, которое проходит ось за один полный оборот конечной 
+#	передачи. По умолчанию не используется передаточное число.
 endstop_pin:
 #   Endstop switch detection pin. This parameter must be provided for
 #   the X, Y, and Z steppers on cartesian style printers.
