@@ -81,7 +81,7 @@ serial:
 [printer]
 kinematics:
 #   Тип используемого принтера. Этот параметр может быть одним 
-#   из следующих: cartesian, corexy, corexz, hybrid-corexy, hybrid-cortez, 
+#   из следующих: cartesian(декартовый), corexy, corexz, hybrid-corexy, hybrid-cortez, 
 #   rotary_delta, delta, polar, winch или нет. 
 #   Этот параметр необходимо указать.
 max_velocity:
@@ -150,72 +150,68 @@ microsteps:
 #	расстояние, которое проходит ось за один полный оборот конечной 
 #	передачи. По умолчанию не используется передаточное число.
 endstop_pin:
-#   Endstop switch detection pin. This parameter must be provided for
-#   the X, Y, and Z steppers on cartesian style printers.
+#   Штифт обнаружения концевого выключателя. Этот параметр должен быть 
+#   указан для шагов X, Y и Z на принтерах типа cartesian.
 #position_min: 0
-#   Minimum valid distance (in mm) the user may command the stepper to
-#   move to.  The default is 0mm.
+#   Минимальное допустимое расстояние (в мм), на которое пользователь может 
+#	дать команду шаговому устройству переместиться.  Значение по умолчанию равно 0 мм.
 position_endstop:
-#   Location of the endstop (in mm). This parameter must be provided
-#   for the X, Y, and Z steppers on cartesian style printers.
+#   Расположение концевого упора (в мм). Этот параметр должен быть указан 
+#	для шаговых значений X, Y и Z на принтерах типа cartesian.
 position_max:
-#   Maximum valid distance (in mm) the user may command the stepper to
-#   move to. This parameter must be provided for the X, Y, and Z
-#   steppers on cartesian style printers.
+#   Максимальное допустимое расстояние (в мм), на которое пользователь 
+#	может дать команду шаговому устройству переместиться. Этот параметр должен 
+#	быть указан для шагов X, Y и Z на принтерах типа cartesian.
 #homing_speed: 5.0
-#   Maximum velocity (in mm/s) of the stepper when homing. The default
-#   is 5mm/s.
+#   Максимальная скорость (в мм/с) шагового двигателя при наведении. 
+#	Значение по умолчанию 5 мм/с.
 #homing_retract_dist: 5.0
-#   Distance to backoff (in mm) before homing a second time during
-#   homing. Set this to zero to disable the second home. The default
-#   is 5mm.
+#   Расстояние отступления (в мм) перед повторной парковкой. Установите это 
+#	значение равным нулю, чтобы отключить повторную парковку. Значение 
+#	по умолчанию 5 мм.
 #homing_retract_speed:
-#   Speed to use on the retract move after homing in case this should
-#   be different from the homing speed, which is the default for this
-#   parameter
+#   Скорость, используемая при движении назад после предварительной парковки, в случае, 
+#	если она должна отличаться от скорости парковки, которая используется
+#	по умолчанию для этого параметра.
 #second_homing_speed:
-#   Velocity (in mm/s) of the stepper when performing the second home.
-#   The default is homing_speed/2.
+#   Скорость (в мм/с) шагового двигателя при выполнении повторной парковки.
+# 	Значение по умолчанию homing_speed/2.
 #homing_positive_dir:
-#   If true, homing will cause the stepper to move in a positive
-#   direction (away from zero); if false, home towards zero. It is
-#   better to use the default than to specify this parameter. The
-#   default is true if position_endstop is near position_max and false
-#   if near position_min.
+#  	Если значение true, парковка будет идти в положительном направлении (от нуля); 
+#	если значение false, то в отрицательном (к нулю). Лучше использовать значение 
+#	по умолчанию, чем указывать этот параметр. Значение по умолчанию равно true, если 
+#	position_endstop находится рядом с position_max, и false, если рядом с position_min.
 ```
 
 ## Cartesian Kinematics
 
-See [example-cartesian.cfg](../config/example-cartesian.cfg) for an
-example cartesian kinematics config file.
+См. [example-cartesian.cfg](../config/example-cartesian.cfg) для примера 
+конфигурационный файл для кинематики типа cartesian.
 
-Only parameters specific to cartesian printers are described here -
-see [common kinematic settings](#common-kinematic-settings) for
-available parameters.
+Здесь описаны только параметры, характерные для cartesian -
+см. в [common kinematic settings](#common-kinematic-settings) 
+доступные параметры.
 
 ```
 [printer]
 kinematics: cartesian
 max_z_velocity:
-#   This sets the maximum velocity (in mm/s) of movement along the z
-#   axis. This setting can be used to restrict the maximum speed of
-#   the z stepper motor. The default is to use max_velocity for
-#   max_z_velocity.
+#   Это устанавливает максимальную скорость (в мм/с) движения вдоль оси z.
+#	Эту настройку можно использовать для ограничения максимальной скорости 
+#	шагового двигателя z. По умолчанию используется max_velocity для max_z_velocity.
 max_z_accel:
-#   This sets the maximum acceleration (in mm/s^2) of movement along
-#   the z axis. It limits the acceleration of the z stepper motor. The
-#   default is to use max_accel for max_z_accel.
+#   Это задает максимальное ускорение (в мм/с^2) движения вдоль оси z. 
 
-# The stepper_x section is used to describe the stepper controlling
-# the X axis in a cartesian robot.
+# 	Раздел stepper_x используется для описания шагового устройства, 
+#	управляющего осью X в декартовом роботе.
 [stepper_x]
 
-# The stepper_y section is used to describe the stepper controlling
-# the Y axis in a cartesian robot.
+# 	Раздел stepper_y используется для описания шагового устройства, 
+#	управляющего осью Y в декартовом роботе.
 [stepper_y]
 
-# The stepper_z section is used to describe the stepper controlling
-# the Z axis in a cartesian robot.
+# 	Раздел stepper_z используется для описания шагового устройства, 
+#	управляющего осью Z в декартовом роботе.
 [stepper_z]
 ```
 
