@@ -2269,7 +2269,7 @@ serial_no:
 
 ## [fan]
 
-Print cooling fan.
+Вентилятор охлаждения печати.
 
 ```
 [fan]
