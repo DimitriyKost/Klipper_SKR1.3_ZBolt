@@ -2274,70 +2274,71 @@ Print cooling fan.
 ```
 [fan]
 pin:
-#   Output pin controlling the fan. This parameter must be provided.
+#   Выходной штифт, управляющий вентилятором. Этот параметр должен быть указан.
 #max_power: 1.0
-#   The maximum power (expressed as a value from 0.0 to 1.0) that the
-#   pin may be set to. The value 1.0 allows the pin to be set fully
-#   enabled for extended periods, while a value of 0.5 would allow the
-#   pin to be enabled for no more than half the time. This setting may
-#   be used to limit the total power output (over extended periods) to
-#   the fan. If this value is less than 1.0 then fan speed requests
-#   will be scaled between zero and max_power (for example, if
-#   max_power is .9 and a fan speed of 80% is requested then the fan
-#   power will be set to 72%). The default is 1.0.
+#   Максимальная мощность (выраженная в значении от 0,0 до 1,0), на которую 
+#	может быть установлен вывод. Значение 1.0 позволяет установить пин-код 
+#	полностью включенным в течение длительных периодов времени, в то время 
+#	как значение 0,5 позволит включать пин-код не более чем в половине случаев. 
+#	Эта настройка может использоваться для ограничения общей выходной мощности 
+#	вентилятора (в течение длительного времени). Если это значение меньше 1,0, 
+#	то запросы на скорость вращения вентилятора будут масштабироваться между 
+#	нулем и максимальной мощностью (например, если максимальная мощность равна 0,9
+#	и требуется скорость вращения вентилятора 80%, то мощность вентилятора будет 
+#	установлена на 72%). Значение по умолчанию равно 1.0.
 #shutdown_speed: 0
-#   The desired fan speed (expressed as a value from 0.0 to 1.0) if
-#   the micro-controller software enters an error state. The default
-#   is 0.
+#   Требуемая скорость вращения вентилятора (выраженная в значении от 0,0 до 1,0), 
+#	если программное обеспечение микроконтроллера переходит в состояние ошибки. 
+#	Значение по умолчанию равно 0.
 #cycle_time: 0.010
-#   The amount of time (in seconds) for each PWM power cycle to the
-#   fan. It is recommended this be 10 milliseconds or greater when
-#   using software based PWM. The default is 0.010 seconds.
+#   Количество времени (в секундах) для каждого цикла питания ШИМ вентилятора. 
+#	Рекомендуется, чтобы это было 10 миллисекунд или больше при использовании 
+#	ШИМ на основе программного обеспечения. Значение по умолчанию равно 0,010 секунды.
 #hardware_pwm: False
-#   Enable this to use hardware PWM instead of software PWM. Most fans
-#   do not work well with hardware PWM, so it is not recommended to
-#   enable this unless there is an electrical requirement to switch at
-#   very high speeds. When using hardware PWM the actual cycle time is
-#   constrained by the implementation and may be significantly
-#   different than the requested cycle_time. The default is False.
+#   Включите это, чтобы использовать аппаратную ШИМ вместо программной ШИМ. 
+#	Большинство вентиляторов плохо работают с аппаратной ШИМ, поэтому не рекомендуется
+#	включать ее, если только для переключения на очень высоких скоростях не требуется
+#	?электричество?. При использовании аппаратной ШИМ фактическое время цикла ограничено 
+#	реализацией и может значительно отличаться от запрошенного времени цикла. 
+#	Значение по умолчанию равно False.
 #kick_start_time: 0.100
-#   Time (in seconds) to run the fan at full speed when either first
-#   enabling or increasing it by more than 50% (helps get the fan
-#   spinning). The default is 0.100 seconds.
+#   Время (в секундах) для запуска вентилятора на полной скорости при первом 
+#	включении или увеличении его более чем на 50% (помогает запустить вентилятор). 
+#	Значение по умолчанию равно 0,100 секунды.
 #off_below: 0.0
-#   The minimum input speed which will power the fan (expressed as a
-#   value from 0.0 to 1.0). When a speed lower than off_below is
-#   requested the fan will instead be turned off. This setting may be
-#   used to prevent fan stalls and to ensure kick starts are
-#   effective. The default is 0.0.
+#   Минимальная входная скорость, при которой вентилятор будет работать 
+#	(выражается в диапазоне от 0,0 до 1,0). Когда запрашивается скорость ниже, 
+#	чем off_below, вентилятор вместо этого будет выключен. Эта настройка может 
+#	использоваться для предотвращения остановки вентилятора и обеспечения 
+#	эффективности запуска. Значение по умолчанию равно 0.0.
 #
-#   This setting should be recalibrated whenever max_power is adjusted.
-#   To calibrate this setting, start with off_below set to 0.0 and the
-#   fan spinning. Gradually lower the fan speed to determine the lowest
-#   input speed which reliably drives the fan without stalls. Set
-#   off_below to the duty cycle corresponding to this value (for
-#   example, 12% -> 0.12) or slightly higher.
+#   Эта настройка должна быть повторно откалибрована при каждой настройке max_power. 
+#	Чтобы откалибровать эту настройку, начните с параметра off_below, установленного
+#	на 0.0, и вращения вентилятора. Постепенно снижайте скорость вращения вентилятора, 
+#	чтобы определить наименьшую входную скорость, которая надежно управляет 
+#	вентилятором без остановок. Установите значение off_below в рабочий цикл, 
+#	соответствующий этому значению (например, 12% -> 0,12) или немного выше.
 #tachometer_pin:
-#   Tachometer input pin for monitoring fan speed. A pullup is generally
-#   required. This parameter is optional.
+#   Входной штифт тахометра для контроля скорости вращения вентилятора. 
+#	Как правило, требуется подтягивание. Этот параметр является необязательным.
 #tachometer_ppr: 2
-#   When tachometer_pin is specified, this is the number of pulses per
-#   revolution of the tachometer signal. For a BLDC fan this is
-#   normally half the number of poles. The default is 2.
+#   Когда указан tachometer_pin, это количество импульсов на оборот сигнала 
+#	тахометра. Для вентилятора BLDC это обычно вдвое меньше числа полюсов. 
+#	Значение по умолчанию равно 2.
 #tachometer_poll_interval: 0.0015
-#   When tachometer_pin is specified, this is the polling period of the
-#   tachometer pin, in seconds. The default is 0.0015, which is fast
-#   enough for fans below 10000 RPM at 2 PPR. This must be smaller than
-#   30/(tachometer_ppr*rpm), with some margin, where rpm is the
-#   maximum speed (in RPM) of the fan.
+#   Когда указан tachometer_pin, это период опроса PIN-кода тахометра в секундах. 
+#	Значение по умолчанию равно 0,0015, что достаточно быстро для вентиляторов 
+#	с частотой вращения ниже 10000 об / мин при 2 PPR. Это должно быть меньше 
+#	30/(тахометр или*об / мин), с некоторым запасом, где об / мин-максимальная
+#	скорость (в об / мин) вентилятора.
 ```
 
 ## [heater_fan]
 
-Heater cooling fans (one may define any number of sections with a
-"heater_fan" prefix). A "heater fan" is a fan that will be enabled
-whenever its associated heater is active. By default, a heater_fan has
-a shutdown_speed equal to max_power.
+Вентиляторы охлаждения нагревателя (можно определить любое количество секций с 
+префиксом "heater_fan"). "Вентилятор обогревателя" - это вентилятор, который включается
+всякий раз, когда активен связанный с ним нагреватель. По умолчанию heater_fan
+имеет скорость выключения, равную max_power.
 
 ```
 [heater_fan my_nozzle_fan]
@@ -2351,29 +2352,29 @@ a shutdown_speed equal to max_power.
 #tachometer_pin:
 #tachometer_ppr:
 #tachometer_poll_interval:
-#   See the "fan" section for a description of the above parameters.
+#   См. раздел "fan" для описания вышеуказанных параметров.
 #heater: extruder
-#   Name of the config section defining the heater that this fan is
-#   associated with. If a comma separated list of heater names is
-#   provided here, then the fan will be enabled when any of the given
-#   heaters are enabled. The default is "extruder".
+#   Имя раздела конфигурации, определяющего нагреватель, с которым связан
+#	этот вентилятор. Если здесь указан разделенный запятыми список имен 
+#	заголовков, то вентилятор будет включен, когда будет включен любой из 
+#	указанных нагревателей. По умолчанию используется "extruder".
 #heater_temp: 50.0
-#   A temperature (in Celsius) that the heater must drop below before
-#   the fan is disabled. The default is 50 Celsius.
+#  Температура (в градусах Цельсия), ниже которой должен опуститься нагреватель, 
+#	прежде чем вентилятор будет отключен. Значение по умолчанию-50 градусов Цельсия.
 #fan_speed: 1.0
-#   The fan speed (expressed as a value from 0.0 to 1.0) that the fan
-#   will be set to when its associated heater is enabled. The default
-#   is 1.0
+#   Скорость вращения вентилятора (выраженная в диапазоне от 0,0 до 1,0), 
+#	на которую будет установлен вентилятор при включении соответствующего 
+#	нагревателя. Значение по умолчанию равно 1.0
 ```
 
 ## [controller_fan]
 
-Controller cooling fan (one may define any number of sections with a
-"controller_fan" prefix). A "controller fan" is a fan that will be
-enabled whenever its associated heater or any configured stepper
-driver is active. The fan will stop whenever an idle_timeout is
-reached to ensure no overheating will occur after deactivating a
-watched component.
+Вентилятор охлаждения контроллера (можно определить любое количество секций
+с префиксом "controller_fan"). "Вентилятор контроллера" - это вентилятор, 
+который включается всякий раз, когда активен соответствующий нагреватель или 
+любой настроенный шаговый драйвер. Вентилятор будет останавливаться всякий раз, 
+когда будет достигнут режим ожидания, чтобы убедиться, что после отключения 
+наблюдаемого компонента не произойдет перегрева.
 
 ```
 [controller_fan my_controller_fan]
@@ -2387,36 +2388,37 @@ watched component.
 #tachometer_pin:
 #tachometer_ppr:
 #tachometer_poll_interval:
-#   See the "fan" section for a description of the above parameters.
+#   См. раздел "fan" для описания вышеуказанных параметров.
 #fan_speed: 1.0
-#   The fan speed (expressed as a value from 0.0 to 1.0) that the fan
-#   will be set to when a heater or stepper driver is active.
-#   The default is 1.0
+#   Скорость вращения вентилятора (выраженная в диапазоне от 0,0 до 1,0),
+#	на которую будет установлен вентилятор при активном нагревателе или
+#	шаговом приводе. Значение по умолчанию равно 1.0
 #idle_timeout:
-#   The amount of time (in seconds) after a stepper driver or heater
-#   was active and the fan should be kept running. The default
-#   is 30 seconds.
+#   Количество времени (в секундах) после того, как шаговый драйвер или 
+#	нагреватель были активны и вентилятор должен продолжать работать. 
+#	Значение по умолчанию равно 30 секундам.
 #idle_speed:
-#   The fan speed (expressed as a value from 0.0 to 1.0) that the fan
-#   will be set to when a heater or stepper driver was active and
-#   before the idle_timeout is reached. The default is fan_speed.
+#   Скорость вращения вентилятора (выраженная в значении от 0,0 до 1,0), 
+#	на которую вентилятор будет установлен, когда нагреватель или шаговый 
+#	драйвер были активны и до достижения значения idle_timeout. 
+#	Значение по умолчанию fan_speed.
 #heater:
-#   Name of the config section defining the heater that this fan is
-#   associated with. If a comma separated list of heater names is
-#   provided here, then the fan will be enabled when any of the given
-#   heaters are enabled. The default is "extruder".
+#   Имя раздела конфигурации, определяющего нагреватель, с которым связан
+#	этот вентилятор. Если здесь указан разделенный запятыми список имен 
+#	заголовков, то вентилятор будет включен, когда будет включен любой из 
+#	указанных нагревателей. По умолчанию используется "extruder".
 ```
 
 ## [temperature_fan]
 
-Temperature-triggered cooling fans (one may define any number of
-sections with a "temperature_fan" prefix). A "temperature fan" is a
-fan that will be enabled whenever its associated sensor is above a set
-temperature. By default, a temperature_fan has a shutdown_speed equal
-to max_power.
+Вентиляторы охлаждения с регулируемой температурой (можно определить любое 
+количество секций с префиксом "temperature_fan"). "Температурный вентилятор" - 
+это вентилятор, который включается всякий раз, когда связанный с ним датчик 
+превышает заданную температуру. По умолчанию temperature_fan имеет скорость 
+выключения, равную max_power.
 
-See the [command reference](G-Codes.md#temperature-fan-commands) for
-additional information.
+См. [command reference](G-Codes.md#temperature-fan-commands) для получения
+дополнительной информации.
 
 ```
 [temperature_fan my_temp_fan]
@@ -2430,7 +2432,7 @@ additional information.
 #tachometer_pin:
 #tachometer_ppr:
 #tachometer_poll_interval:
-#   See the "fan" section for a description of the above parameters.
+#   См. раздел "fan" для описания вышеуказанных параметров.
 #sensor_type:
 #sensor_pin:
 #control:
@@ -2477,7 +2479,7 @@ with the SET_FAN_SPEED
 #tachometer_pin:
 #tachometer_ppr:
 #tachometer_poll_interval:
-#   See the "fan" section for a description of the above parameters.
+#   См. раздел "fan" для описания вышеуказанных параметров.
 ```
 
 # Additional servos, LEDs, buttons, and other pins
