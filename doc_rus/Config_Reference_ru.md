@@ -217,83 +217,82 @@ max_z_accel:
 
 ## Linear Delta Kinematics
 
-See [example-delta.cfg](../config/example-delta.cfg) for an example
-linear delta kinematics config file. See the
-[delta calibrate guide](Delta_Calibrate.md) for information on
-calibration.
+Смотри [example-delta.cfg](../config/example-delta.cfg) для примера 
+конфигурационный файл дельта кинематики. Смотри [delta calibrate guide]
+(Delta_Calibrate.md) информацию по калибровке.
 
-Only parameters specific to linear delta printers are described here -
-see [common kinematic settings](#common-kinematic-settings) for
-available parameters.
+Здесь описаны только параметры, характерные для линейных дельта - принтеров-
+см. [common kinematic settings](#common-kinematic-settings) для
+доступных параметров.
 
 ```
 [printer]
 kinematics: delta
 max_z_velocity:
-#   For delta printers this limits the maximum velocity (in mm/s) of
-#   moves with z axis movement. This setting can be used to reduce the
-#   maximum speed of up/down moves (which require a higher step rate
-#   than other moves on a delta printer). The default is to use
-#   max_velocity for max_z_velocity.
+#   Для дельта-принтеров это ограничивает максимальную скорость (в мм/с) 
+#   перемещений с перемещением по оси z. Этот параметр можно использовать
+#   для уменьшения максимальной скорости перемещений вверх/вниз (для которых
+#   требуется более высокая скорость шага, чем для других перемещений на 
+#   дельта-принтере). По умолчанию используется max_velocity для max_z_velocity.
 #minimum_z_position: 0
-#   The minimum Z position that the user may command the head to move
-#   to. The default is 0.
+#   Минимальное положение Z, в которое пользователь может приказать 
+#   переместить голову. Значение по умолчанию равно 0.
 delta_radius:
-#   Radius (in mm) of the horizontal circle formed by the three linear
-#   axis towers. This parameter may also be calculated as:
-#    delta_radius = smooth_rod_offset - effector_offset - carriage_offset
-#   This parameter must be provided.
+#   Радиус (в мм) горизонтальной окружности, образованной тремя башнями 
+#   с линейной осью. Этот параметр также может быть рассчитан следующим 
+#   образом: delta_radius = smooth_rod_offset - effector_offset - carriage_offset 
+#   Этот параметр должен быть указан.
 #print_radius:
-#   The radius (in mm) of valid toolhead XY coordinates. One may use
-#   this setting to customize the range checking of toolhead moves. If
-#   a large value is specified here then it may be possible to command
-#   the toolhead into a collision with a tower. The default is to use
-#   delta_radius for print_radius (which would normally prevent a
-#   tower collision).
+#   Радиус (в мм) допустимых координат XY инструментальной головки. 
+#   Этот параметр можно использовать для настройки проверки диапазона 
+#   перемещений инструментальной головки. Если здесь указано большое значение, 
+#   то может оказаться возможным привести инструментальную головку к 
+#   столкновению с башней. По умолчанию используется delta_radius для 
+#   print_radius (что обычно предотвращает столкновение башен).
 
-# The stepper_a section describes the stepper controlling the front
-# left tower (at 210 degrees). This section also controls the homing
-# parameters (homing_speed, homing_retract_dist) for all towers.
+#   Раздел stepper_a описывает шаг, управляющий передней левой башней 
+#   (под углом 210 градусов). Этот раздел также управляет параметрами 
+#   самонаведения (homing_speed, homing_retract_dist) для всех башен.
 [stepper_a]
 position_endstop:
-#   Distance (in mm) between the nozzle and the bed when the nozzle is
-#   in the center of the build area and the endstop triggers. This
-#   parameter must be provided for stepper_a; for stepper_b and
-#   stepper_c this parameter defaults to the value specified for
-#   stepper_a.
+#   Расстояние (в мм) между соплом и станиной, когда сопло находится в 
+#   центре области сборки, и срабатывает концевой упор. Этот параметр 
+#   должен быть указан для stepper_a; для stepper_b и stepper_c этот 
+#   параметр по умолчанию имеет значение, указанное для stepper_a.
 arm_length:
-#   Length (in mm) of the diagonal rod that connects this tower to the
-#   print head. This parameter must be provided for stepper_a; for
-#   stepper_b and stepper_c this parameter defaults to the value
-#   specified for stepper_a.
+#   Длина (в мм) диагонального стержня, соединяющего эту башню с 
+#   печатающей головкой. Этот параметр должен быть указан для stepper_a; 
+#   для stepper_b и stepper_c этот параметр по умолчанию имеет значение, 
+#   указанное для stepper_a.
 #angle:
-#   This option specifies the angle (in degrees) that the tower is
-#   at. The default is 210 for stepper_a, 330 for stepper_b, and 90
-#   for stepper_c.
+#   Этот параметр определяет угол (в градусах), под которым находится башня. 
+#   Значение по умолчанию равно 210 для stepper_a, 330 для stepper_b и 
+#   90 для stepper_c.
 
-# The stepper_b section describes the stepper controlling the front
-# right tower (at 330 degrees).
+#   Раздел stepper_b описывает шаговое управление передней правой башней 
+#   (под углом 330 градусов). 
 [stepper_b]
 
-# The stepper_c section describes the stepper controlling the rear
-# tower (at 90 degrees).
+#   Раздел stepper_c описывает шаговое управление передней правой башней 
+#   (под углом 90 градусов).
 [stepper_c]
 
-# The delta_calibrate section enables a DELTA_CALIBRATE extended
-# g-code command that can calibrate the tower endstop positions and
-# angles.
+#   Раздел delta_calibrate включает расширенную команду g-кода DELTA_CALIBRATE, 
+#   которая может откалибровать положения и углы упора башни.
 [delta_calibrate]
 radius:
-#   Radius (in mm) of the area that may be probed. This is the radius
-#   of nozzle coordinates to be probed; if using an automatic probe
-#   with an XY offset then choose a radius small enough so that the
-#   probe always fits over the bed. This parameter must be provided.
+#   Радиус (в мм) области, которая может быть исследована. Это радиус 
+#   координат сопла, подлежащего зондированию; если используется автоматический
+#   зонд со смещением XY, выберите радиус, достаточно малый, чтобы зонд 
+#   всегда располагался над ложем. Этот параметр должен быть указан.
 #speed: 50
-#   The speed (in mm/s) of non-probing moves during the calibration.
-#   The default is 50.
+#   Скорость (в мм/с) непробиваемых перемещений во время калибровки. 
+#   Значение по умолчанию равно 50.
+
 #horizontal_move_z: 5
-#   The height (in mm) that the head should be commanded to move to
-#   just prior to starting a probe operation. The default is 5.
+#   Высота (в мм), на которую должна быть подана команда на перемещение 
+#   головки непосредственно перед началом работы зонда. 
+#   Значение по умолчанию равно 5.
 ```
 
 ## CoreXY Kinematics
