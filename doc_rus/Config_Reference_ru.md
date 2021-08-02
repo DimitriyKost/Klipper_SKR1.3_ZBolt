@@ -297,36 +297,33 @@ radius:
 
 ## CoreXY Kinematics
 
-See [example-corexy.cfg](../config/example-corexy.cfg) for an example
-corexy (and h-bot) kinematics file.
+Смотри [example-corexy.cfg](../config/example-corexy.cfg) для примера 
+файл кинематики corexy (и hbot).
 
-Only parameters specific to corexy printers are described here - see
-[common kinematic settings](#common-kinematic-settings) for available
-parameters.
+Здесь описаны только параметры, характерные для принтеров corexy. Доступные 
+параметры см. в разделе [common kinematic settings](#common-kinematic-settings)
 
 ```
 [printer]
 kinematics: corexy
 max_z_velocity:
-#   This sets the maximum velocity (in mm/s) of movement along the z
-#   axis. This setting can be used to restrict the maximum speed of
-#   the z stepper motor. The default is to use max_velocity for
-#   max_z_velocity.
+#   Это устанавливает максимальную скорость (в мм/с) движения вдоль оси z. 
+#   Эту настройку можно использовать для ограничения максимальной скорости 
+#   шагового двигателя z. По умолчанию используется max_velocity для max_z_velocity.
 max_z_accel:
-#   This sets the maximum acceleration (in mm/s^2) of movement along
-#   the z axis. It limits the acceleration of the z stepper motor. The
-#   default is to use max_accel for max_z_accel.
+#   Это задает максимальное ускорение (в мм/с^2) движения вдоль оси z. 
+#   Это ограничивает ускорение шагового двигателя z. По умолчанию используется 
+#   max_accel для max_z_accel.
 
-# The stepper_x section is used to describe the X axis as well as the
-# stepper controlling the X+Y movement.
+# Раздел stepper_x используется для описания оси X, а также шагового механизма, 
+# управляющего движением X+Y.
 [stepper_x]
 
-# The stepper_y section is used to describe the Y axis as well as the
-# stepper controlling the X-Y movement.
+# Раздел stepper_y используется для описания оси Y, а также шагового механизма,
+# управляющего движением X-Y.
 [stepper_y]
 
-# The stepper_z section is used to describe the stepper controlling
-# the Z axis.
+# Раздел stepper_z используется для описания шагового устройства, управляющего осью Z.
 [stepper_z]
 ```
 
