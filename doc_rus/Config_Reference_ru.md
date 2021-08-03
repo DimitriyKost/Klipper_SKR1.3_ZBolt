@@ -612,10 +612,10 @@ max_accel: 1
 
 ## [extruder]
 
-The extruder section is used to describe both the stepper controlling
-the printer extruder and the heater parameters for the nozzle. See the
-[pressure advance guide](Pressure_Advance.md) for information on
-tuning pressure advance.
+Раздел экструдера используется для описания как шагового управления 
+экструдером принтера, так и параметров нагревателя сопла. 
+См. [руководство по повышению давления](Pressure_Advance.md) для получения 
+информации о предварительной настройке давления.
 
 ```
 [extruder]
