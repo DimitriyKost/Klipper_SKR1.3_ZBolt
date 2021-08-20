@@ -1,19 +1,19 @@
 Добавил этот текст в мой printer.cfg.
 Это отличный способ добавить свои собственные элементы меню без редактирования menu.cfg и других системных файлов.
 
-#[menu __main]
-#type: list
-#name: Main Menu
-#items:
-#    __tune
-#    __user
-#    __octoprint
-#    __sdcard
-#    __control
-#    __temp
-#    __filament
-#    __prepare
-#    __test
+[menu __main]
+type: list
+name: Main Menu
+items:
+    __tune
+    __user
+    __octoprint
+    __sdcard
+    __control
+    __temp
+    __filament
+    __prepare
+    __test
 
 [menu __user]
 type: list
