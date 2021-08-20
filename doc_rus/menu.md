@@ -1,6 +1,6 @@
 Добавил этот текст в мой printer.cfg.
 Это отличный способ добавить свои собственные элементы меню без редактирования menu.cfg и других системных файлов.
-
+'''
 [menu __main]
 type: list
 name: Main Menu
@@ -40,5 +40,5 @@ type:command
 name: RESUME
 gcode:
     RESUME_MACRO
-
+'''
 
